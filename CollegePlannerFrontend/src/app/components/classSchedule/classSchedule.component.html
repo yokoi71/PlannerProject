@@ -1,0 +1,161 @@
+<app-header></app-header>
+
+<div class="flex flex-col gap-8 p-6 sm:p-8 md:p-10">
+  <!-- Header Section -->
+  <section
+    class="bg-blue-900 bg-opacity-90 rounded-xl shadow-lg p-2 sm:p-3 md:p-4 text-white"
+  >
+    <h1
+      class="text-xl font-bold text-white !text-white"
+      style="color: white !important"
+    >
+      Class Schedule
+    </h1>
+  </section>
+
+  <!-- Semester Selection -->
+  <section
+    class="bg-blue-200 bg-opacity-80 rounded-xl shadow-lg p-8 sm:p-10 md:p-12 text-blue-900"
+  >
+    <div class="flex items-center gap-4 mb-6">
+      <h2 class="text-lg font-semibold pt-2">Semester</h2>
+      <select
+        [(ngModel)]="selectedSemester"
+        (change)="onSemesterChange()"
+        name="semester"
+        class="px-4 py-3 border border-blue-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-colors duration-200 bg-white text-blue-900 font-medium"
+      >
+        <option [ngValue]="null" disabled>Select a semester</option>
+        <option *ngFor="let semester of semesters" [ngValue]="semester">
+          {{ semester.year }} {{ semester.term }}
+        </option>
+      </select>
+    </div>
+
+    <!-- Schedule Table and Control Panel Container -->
+    <div class="flex flex-col lg:flex-row gap-6">
+      <!-- Schedule Table -->
+      <div
+        class="flex-1 bg-white bg-opacity-90 rounded-lg p-6 shadow-sm overflow-x-auto"
+      >
+        <table class="w-full border-collapse table-fixed">
+          <thead>
+            <tr class="border-b-2 border-blue-200">
+              <th
+                class="w-20 px-4 py-3 text-left font-semibold text-blue-900 bg-blue-50 rounded-tl-lg"
+              >
+                Time
+              </th>
+              <th
+                *ngFor="let day of days"
+                class="w-1/7 px-4 py-3 text-center font-semibold text-blue-900 bg-blue-50"
+              >
+                {{ day }}
+              </th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr
+              *ngFor="let timeSlot of timeSlots"
+              class="border-b border-blue-100 hover:bg-blue-50 transition-colors duration-200"
+            >
+              <td
+                class="w-20 px-4 py-3 text-sm font-medium text-blue-700 bg-blue-50"
+              >
+                {{ timeSlot }}
+              </td>
+              <ng-container *ngFor="let day of days">
+                <ng-container
+                  *ngIf="
+                    getCourseWeeklyScheduleAtSlot(day, timeSlot) as schedule;
+                    else emptyCell
+                  "
+                >
+                  <td
+                    class="w-1/7 px-2 py-2 text-center"
+                    [ngStyle]="{
+                      'background-color': getCourseColor(schedule),
+                      opacity: isClassStartSlot(day, timeSlot) ? 1 : 0.7
+                    }"
+                  >
+                    <ng-container *ngIf="isClassStartSlot(day, timeSlot)">
+                      <div class="text-xs font-semibold text-gray-800">
+                        {{ getCourseName(schedule) }}
+                      </div>
+                      <div class="text-xs text-gray-600">
+                        {{ schedule.startTime }} - {{ schedule.endTime }}
+                      </div>
+                    </ng-container>
+                  </td>
+                </ng-container>
+                <ng-template #emptyCell>
+                  <td class="w-1/7 px-2 py-2"></td>
+                </ng-template>
+              </ng-container>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <!-- Control Panel -->
+      <div class="lg:w-80 bg-white bg-opacity-90 rounded-lg p-6 shadow-sm">
+        <h3
+          class="text-xl font-semibold mb-4 text-blue-900 border-b-2 border-blue-200 pb-3"
+        >
+          <i class="fa fa-cogs text-blue-600 mr-3"></i>
+          Class Management
+        </h3>
+
+        <div class="flex flex-col gap-4">
+          <button
+            (click)="onAddClassClick()"
+            class="px-6 py-3 bg-green-600 text-white font-semibold rounded-lg hover:bg-green-700 focus:ring-4 focus:ring-green-300 transition-colors duration-200 transform hover:scale-105"
+          >
+            <i class="fa fa-plus mr-2"></i>
+            Add Class
+          </button>
+
+          <button
+            (click)="onDeleteClassClick()"
+            class="px-6 py-3 bg-red-600 text-white font-semibold rounded-lg hover:bg-red-700 focus:ring-4 focus:ring-red-300 transition-colors duration-200 transform hover:scale-105"
+          >
+            <i class="fa fa-trash mr-2"></i>
+            Delete Class
+          </button>
+
+          <button
+            (click)="onUpdateClassClick()"
+            class="px-6 py-3 bg-blue-600 text-white font-semibold rounded-lg hover:bg-blue-700 focus:ring-4 focus:ring-blue-300 transition-colors duration-200 transform hover:scale-105"
+          >
+            <i class="fa fa-edit mr-2"></i>
+            Update Class
+          </button>
+        </div>
+      </div>
+    </div>
+  </section>
+</div>
+
+<!-- Modal Components -->
+<app-add-class
+  *ngIf="showAddClass"
+  [semesterId]="selectedSemester?.id || 0"
+  (classAdded)="onClassAdded($event)"
+  (cancelled)="onAddClassCancelled()"
+>
+</app-add-class>
+
+<app-delete-class-dialog
+  *ngIf="showDeleteDialog"
+  [availableClasses]="availableClasses"
+  [selectedClassId]="selectedClassId"
+  (confirm)="onDeleteDialogConfirm($event)"
+  (cancel)="onDeleteDialogCancel()"
+></app-delete-class-dialog>
+
+<app-update-class-dialog
+  *ngIf="showUpdateDialog"
+  [selectedClassId]="selectedClassId"
+  (confirm)="onUpdateDialogConfirm($event)"
+  (cancel)="onUpdateDialogCancel()"
+></app-update-class-dialog>

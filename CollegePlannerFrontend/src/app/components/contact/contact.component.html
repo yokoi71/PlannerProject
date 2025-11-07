@@ -1,0 +1,193 @@
+<app-header></app-header>
+
+<div class="flex flex-col gap-8 p-6 sm:p-8 md:p-10">
+  <!-- Contact Header Section -->
+  <section
+    class="bg-blue-900 bg-opacity-90 rounded-xl shadow-lg p-8 sm:p-10 md:p-12 text-white"
+  >
+    <h1 class="text-3xl font-bold mb-4 text-center">Contact Us</h1>
+    <p class="text-lg text-blue-100 text-center">
+      Get in touch with us for any questions or support you need
+    </p>
+  </section>
+
+  <!-- Contact Content -->
+  <section
+    class="bg-blue-200 bg-opacity-80 rounded-xl shadow-lg p-8 sm:p-10 md:p-12 text-blue-900"
+  >
+    <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+      <!-- Contact Information -->
+      <div class="space-y-6">
+        <h2 class="text-2xl font-semibold mb-6">Get In Touch</h2>
+
+        <!-- Phone -->
+        <div
+          class="flex items-center space-x-4 p-4 bg-white bg-opacity-90 rounded-lg shadow-sm"
+        >
+          <div class="flex-shrink-0">
+            <i class="fa fa-phone text-2xl text-blue-600"></i>
+          </div>
+          <div>
+            <h3 class="text-lg font-semibold text-blue-900">Call Us</h3>
+            <a
+              href="tel:(123)123-1234"
+              class="text-blue-700 hover:text-blue-900 transition-colors"
+            >
+              (123)123-1234
+            </a>
+          </div>
+        </div>
+
+        <!-- Email -->
+        <div
+          class="flex items-center space-x-4 p-4 bg-white bg-opacity-90 rounded-lg shadow-sm"
+        >
+          <div class="flex-shrink-0">
+            <i class="fa fa-envelope-o text-2xl text-green-600"></i>
+          </div>
+          <div>
+            <h3 class="text-lg font-semibold text-blue-900">Email Us</h3>
+            <a
+              href="mailto:support&#64;eazybank.com"
+              class="text-blue-700 hover:text-blue-900 transition-colors"
+            >
+              support&#64;collegeplanner.com
+            </a>
+          </div>
+        </div>
+
+        <!-- Address -->
+        <div
+          class="flex items-center space-x-4 p-4 bg-white bg-opacity-90 rounded-lg shadow-sm"
+        >
+          <div class="flex-shrink-0">
+            <i class="fa fa-map-marker text-2xl text-red-600"></i>
+          </div>
+          <div>
+            <h3 class="text-lg font-semibold text-blue-900">Address</h3>
+            <p class="text-blue-700">
+              College Planner HQ <br />
+              457 Academic Way, Suite 202<br />
+              Plannerstown, ED 88888
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Contact Form -->
+      <div class="bg-white bg-opacity-90 rounded-lg p-6 shadow-sm">
+        <h2 class="text-2xl font-semibold mb-6 text-blue-900">Send Message</h2>
+
+        <!-- Success Message -->
+        <div
+          *ngIf="model.contactId"
+          class="mb-4 p-4 bg-green-100 border border-green-400 text-green-700 rounded"
+        >
+          Your message is submitted. Reference ID is {{ model.contactId }}
+        </div>
+
+        <form
+          (ngSubmit)="contactForm.valid && saveMessage(contactForm)"
+          #contactForm="ngForm"
+          class="space-y-4"
+        >
+          <!-- Name Field -->
+          <div>
+            <input
+              type="text"
+              class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all"
+              name="contactName"
+              id="contactName"
+              placeholder="Your Name"
+              required
+              [(ngModel)]="model.contactName"
+              #contactName="ngModel"
+            />
+            <div
+              *ngIf="(contactName.touched || contactForm.submitted) && contactName.errors?.['required']"
+              class="text-red-600 text-sm mt-1"
+            >
+              Name is required
+            </div>
+          </div>
+
+          <!-- Email Field -->
+          <div>
+            <input
+              type="email"
+              class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all"
+              name="contactEmail"
+              id="contactEmail"
+              placeholder="Your Email"
+              required
+              pattern="^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$"
+              [(ngModel)]="model.contactEmail"
+              #contactEmail="ngModel"
+            />
+            <div
+              *ngIf="(contactEmail.touched || contactForm.submitted) && contactEmail.errors?.['required']"
+              class="text-red-600 text-sm mt-1"
+            >
+              Email is required
+            </div>
+            <div
+              *ngIf="(contactEmail.touched || contactForm.submitted) && contactEmail.errors?.['pattern']"
+              class="text-red-600 text-sm mt-1"
+            >
+              Please provide a valid email address
+            </div>
+          </div>
+
+          <!-- Subject Field -->
+          <div>
+            <input
+              type="text"
+              class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all"
+              name="subject"
+              id="subject"
+              placeholder="Subject"
+              required
+              [(ngModel)]="model.subject"
+              #subject="ngModel"
+            />
+            <div
+              *ngIf="(subject.touched || contactForm.submitted) && subject.errors?.['required']"
+              class="text-red-600 text-sm mt-1"
+            >
+              Subject is required
+            </div>
+          </div>
+
+          <!-- Message Field -->
+          <div>
+            <textarea
+              name="message"
+              class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all resize-none"
+              id="message"
+              placeholder="Your Message"
+              required
+              rows="5"
+              [(ngModel)]="model.message"
+              #message="ngModel"
+            ></textarea>
+            <div
+              *ngIf="(message.touched || contactForm.submitted) && message.errors?.['required']"
+              class="text-red-600 text-sm mt-1"
+            >
+              Message is required
+            </div>
+          </div>
+
+          <!-- Submit Button -->
+          <button
+            type="submit"
+            class="w-full bg-blue-600 hover:bg-blue-700 text-white font-semibold py-3 px-6 rounded-lg transition-colors duration-200 transform hover:scale-105"
+          >
+            <i class="fa fa-paper-plane mr-2"></i>
+            Send Message
+          </button>
+        </form>
+      </div>
+    </div>
+  </section>
+</div>

@@ -1,0 +1,286 @@
+/* body {
+  font-family: Arial, sans-serif;
+  padding: 20px;
+  background-color: #f4f4f4;
+}
+h1 {
+  text-align: center;
+  margin-top: 100px;
+}
+table {
+  width: 90%;
+  border-collapse: collapse;
+  margin-top: 20px;
+  margin-left: 100px;
+}
+th,
+td {
+  border: 1px solid #ccc;
+  padding: 10px;
+  text-align: center;
+  vertical-align: top;
+}
+th {
+  background-color: #007bff;
+  color: white;
+}
+td {
+  background-color: #fff;
+  height: 80px;
+}
+.time-slot {
+  width: 80px;
+  background-color: #f0f0f0;
+  font-weight: bold;
+} */
+
+/* Use a clean modern font */
+/* @import url("https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap"); */
+
+/* body {
+  font-family: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
+    Oxygen, Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
+  background-color: #f9fafb;
+  padding: 40px 20px;
+  color: #333;
+  margin: 0;
+} */
+
+select {
+  padding: 8px;
+  font-size: 16px;
+  border-radius: 5px;
+  margin: 30px 0 5px;
+}
+
+/* Center and space the heading nicely */
+h1 {
+  text-align: center;
+  margin: 60px 0 40px;
+  font-weight: 600;
+  font-size: 2.4rem;
+  color: #1a202c;
+}
+
+/* Center table with max-width and subtle shadow */
+table {
+  width: unset;
+  max-width: 900px;
+  margin: 0;
+  border-collapse: separate; /* better for rounded corners */
+  border-spacing: 0;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+/* Stylish header cells with smooth blue-purple gradient */
+th {
+  background: linear-gradient(90deg, #4a7bc5, #667eea);
+  color: #fff;
+  font-weight: 600;
+  padding: 14px 12px;
+  text-transform: uppercase;
+  font-size: 0.85rem;
+  letter-spacing: 0.05em;
+  user-select: none;
+}
+
+/* Light, clean borders for header and cells */
+th,
+td {
+  border-right: 1px solid #e2e8f0;
+  border-bottom: 1px solid #e2e8f0;
+  text-align: center;
+  vertical-align: top;
+}
+
+/* Remove right border on last column */
+th:last-child,
+td:last-child {
+  border-right: none;
+}
+
+/* Cells styling */
+td {
+  background-color: #ffffff;
+  padding: 8px 6px;
+  height: 50px;
+  font-size: 0.9rem;
+  line-height: 1.2;
+  transition: background-color 0.2s ease;
+  cursor: text;
+}
+
+/* Highlight editable cells on focus */
+td:focus {
+  outline: 2px solid #007bff;
+  background-color: #e6f0ff;
+}
+
+/* Time slot column */
+.time-slot {
+  background-color: #f7fafc;
+  font-weight: 600;
+  font-size: 0.9rem;
+  color: #4a5568;
+  width: 80px;
+  user-select: none;
+  border-right: 1px solid #cbd5e0;
+}
+
+/* Hover row highlight */
+tbody tr:hover td:not(.time-slot) {
+  background-color: #f1f5f9;
+}
+
+/* Responsive tweak: smaller font on narrow screens */
+@media (max-width: 600px) {
+  table {
+    width: 100%;
+  }
+  h1 {
+    font-size: 1.8rem;
+    margin: 40px 0 30px;
+  }
+  td,
+  th {
+    font-size: 0.8rem;
+    padding: 6px 4px;
+  }
+  td {
+    height: 40px;
+  }
+}
+
+/* Remove the responsive stacking for scheduler-container and always keep side by side layout */
+@media (max-width: 900px) {
+  .scheduler-container {
+    flex-direction: row !important;
+    align-items: flex-start;
+  }
+  .scheduler-table {
+    width: 0;
+    flex: 1 1 0;
+    margin-right: 0;
+    margin-bottom: 0;
+  }
+  .control-panel {
+    width: 300px !important;
+    margin-left: 24px !important;
+    margin-bottom: 0;
+  }
+}
+
+.control-panel {
+  width: 300px;
+  margin-left: 24px;
+  background: #f4f6fa;
+  padding: 20px;
+  border-radius: 12px;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.08);
+  border: 1px solid #e2e8f0;
+  height: fit-content;
+  max-height: 500px;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+}
+
+.control-panel h3 {
+  font-size: 1.4rem !important;
+  font-weight: 600;
+  color: #1a202c;
+  margin: 0 0 20px 0;
+  text-align: center;
+  border-bottom: 2px solid #e2e8f0;
+  padding-bottom: 12px;
+}
+
+.control-panel label {
+  font-size: 1.1rem !important;
+  font-weight: 500;
+  color: #4a5568;
+  margin-bottom: 8px;
+  display: block;
+}
+
+.control-panel select {
+  width: 100%;
+  padding: 10px 12px;
+  border: 2px solid #e2e8f0;
+  border-radius: 8px;
+  font-size: 1rem !important;
+  background-color: white;
+  margin-bottom: 20px;
+  transition: border-color 0.2s ease;
+}
+
+.control-panel select:focus {
+  outline: none;
+  border-color: #007bff;
+  box-shadow: 0 0 0 3px rgba(0, 123, 255, 0.1);
+}
+
+.control-panel button {
+  width: 100%;
+  padding: 12px 16px;
+  border: none;
+  border-radius: 8px;
+  font-size: 1.1rem !important;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  margin-bottom: 8px;
+}
+
+.control-panel button:first-of-type {
+  background-color: #667eea;
+  color: white;
+}
+
+.control-panel button:nth-of-type(2) {
+  background-color: #667eea;
+  color: white;
+}
+
+.control-panel button:nth-of-type(2):hover {
+  background-color: #0056b3;
+  color: white;
+}
+
+.control-panel button:disabled {
+  background-color: #e2e8f0;
+  color: #a0aec0;
+  cursor: not-allowed;
+  transform: none;
+  box-shadow: none;
+}
+
+.control-panel button:disabled:hover {
+  background-color: #e2e8f0;
+  transform: none;
+  box-shadow: none;
+}
+
+.button-container {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin-top: 8px;
+}
+
+.scheduler-container {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: flex-start;
+  max-width: 1300px;
+  margin: 0 auto;
+  gap: 32px;
+}
+
+.scheduler-table {
+  width: unset !important;
+  margin: 0 !important;
+}

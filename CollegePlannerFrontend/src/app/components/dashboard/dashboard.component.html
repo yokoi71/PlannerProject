@@ -1,0 +1,101 @@
+<app-header></app-header>
+
+<div class="flex flex-col gap-8 p-6 sm:p-8 md:p-10">
+  <!-- Welcome Section -->
+  <section
+    class="bg-blue-900 bg-opacity-90 rounded-xl shadow-lg p-8 sm:p-10 md:p-12 text-white"
+  >
+    <h1 class="text-3xl font-bold mb-4">
+      Hi <span class="text-blue-200">{{ user.name }}</span
+      >, Welcome back!
+    </h1>
+    <p class="text-lg text-blue-100">
+      You logged in as <span class="font-semibold">{{ user.role }}</span>
+    </p>
+  </section>
+
+  <!-- Dashboard Cards -->
+  <section
+    class="bg-blue-200 bg-opacity-80 rounded-xl shadow-lg p-8 sm:p-10 md:p-12 text-blue-900"
+  >
+    <h2 class="text-2xl font-semibold mb-8">Quick Access</h2>
+
+    <div
+      class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 gap-6"
+    >
+      <!-- Student Info Card -->
+      <div
+        class="bg-white bg-opacity-90 rounded-lg p-6 shadow-sm border-l-4 border-blue-500 hover:shadow-lg transition-shadow duration-300 cursor-pointer transform hover:scale-105 transition-transform duration-200"
+        routerLink="/myStudentInfo"
+      >
+        <div class="flex flex-col items-center text-center">
+          <i class="fa fa-user-circle-o text-4xl text-blue-600 mb-4"></i>
+          <h3 class="text-xl font-semibold text-blue-900 mb-2">Student Info</h3>
+          <p class="text-sm text-blue-700 opacity-90">
+            View student information details
+          </p>
+        </div>
+      </div>
+
+      <!-- Class Schedule Card -->
+      <div
+        class="bg-white bg-opacity-90 rounded-lg p-6 shadow-sm border-l-4 border-green-500 hover:shadow-lg transition-shadow duration-300 cursor-pointer transform hover:scale-105 transition-transform duration-200"
+        routerLink="/myClassSchedule"
+      >
+        <div class="flex flex-col items-center text-center">
+          <i class="fa fa-calendar text-4xl text-green-600 mb-4"></i>
+          <h3 class="text-xl font-semibold text-blue-900 mb-2">
+            Class Schedule
+          </h3>
+          <p class="text-sm text-blue-700 opacity-90">View class schedule</p>
+        </div>
+      </div>
+
+      <!-- Semester Settings Card -->
+      <div
+        class="bg-white bg-opacity-90 rounded-lg p-6 shadow-sm border-l-4 border-purple-500 hover:shadow-lg transition-shadow duration-300 cursor-pointer transform hover:scale-105 transition-transform duration-200"
+        routerLink="/mySemesterSetup"
+      >
+        <div class="flex flex-col items-center text-center">
+          <i class="fa fa-money text-4xl text-purple-600 mb-4"></i>
+          <h3 class="text-xl font-semibold text-blue-900 mb-2">
+            Semester Settings
+          </h3>
+          <p class="text-sm text-blue-700 opacity-90">
+            Set up semester settings, vacations, events, and reminders
+          </p>
+        </div>
+      </div>
+
+      <!-- Course Assignments Card -->
+      <div
+        class="bg-white bg-opacity-90 rounded-lg p-6 shadow-sm border-l-4 border-red-500 hover:shadow-lg transition-shadow duration-300 cursor-pointer transform hover:scale-105 transition-transform duration-200"
+        routerLink="/myCourseAssignmentsExams"
+      >
+        <div class="flex flex-col items-center text-center">
+          <i class="fa fa-tasks text-4xl text-red-600 mb-4"></i>
+          <h3 class="text-xl font-semibold text-blue-900 mb-2">
+            Course Assignments & Exams
+          </h3>
+          <p class="text-sm text-blue-700 opacity-90">
+            Manage homework and exams for each course
+          </p>
+        </div>
+      </div>
+
+      <!-- Weekly Schedule Card -->
+      <div
+        class="bg-white bg-opacity-90 rounded-lg p-6 shadow-sm border-l-4 border-yellow-500 hover:shadow-lg transition-shadow duration-300 cursor-pointer transform hover:scale-105 transition-transform duration-200"
+        routerLink="/myWeeklySchedule"
+      >
+        <div class="flex flex-col items-center text-center">
+          <i class="fa fa-clock-o text-4xl text-yellow-600 mb-4"></i>
+          <h3 class="text-xl font-semibold text-blue-900 mb-2">
+            Weekly Schedule
+          </h3>
+          <p class="text-sm text-blue-700 opacity-90">View weekly schedule</p>
+        </div>
+      </div>
+    </div>
+  </section>
+</div>

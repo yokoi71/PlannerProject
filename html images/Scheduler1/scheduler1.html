@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Weekly Class Scheduler</title>
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        margin: 20px;
+      }
+
+      h1,
+      h2 {
+        text-align: center;
+      }
+
+      .class-list {
+        max-width: 600px;
+        margin: 0 auto 40px;
+        padding: 20px;
+        border: 1px solid #ccc;
+        border-radius: 10px;
+        background-color: #f9f9f9;
+      }
+
+      .class-list ul {
+        list-style: none;
+        padding: 0;
+      }
+
+      .class-list li {
+        padding: 8px;
+        border-bottom: 1px solid #ddd;
+      }
+
+      .schedule-grid {
+        display: grid;
+        grid-template-columns: repeat(7, 1fr);
+        gap: 10px;
+        max-width: 1200px;
+        margin: 0 auto;
+      }
+
+      .day-column {
+        border: 1px solid #ccc;
+        border-radius: 6px;
+        padding: 8px;
+        min-height: 300px;
+        background: #fefefe;
+      }
+
+      .day-header {
+        font-weight: bold;
+        margin-bottom: 10px;
+        text-align: center;
+      }
+
+      .class-block {
+        background-color: #8ecae6;
+        border-radius: 5px;
+        margin: 6px 0;
+        padding: 4px 6px;
+        font-size: 14px;
+        color: #023047;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>Weekly Class Schedule</h1>
+
+    <div class="class-list">
+      <h2>Class List</h2>
+      <ul>
+        <li>Math 101 - Prof. Smith</li>
+        <li>History 202 - Dr. Brown</li>
+        <li>Biology 150 - Dr. Lee</li>
+        <li>Computer Science 101 - Prof. Kim</li>
+      </ul>
+    </div>
+
+    <div class="schedule-grid">
+      <div class="day-column">
+        <div class="day-header">Monday</div>
+        <div class="class-block">Math 101<br />9:00–10:30</div>
+        <div class="class-block">Biology 150<br />13:00–14:00</div>
+      </div>
+      <div class="day-column">
+        <div class="day-header">Tuesday</div>
+        <div class="class-block">History 202<br />10:00–11:30</div>
+      </div>
+      <div class="day-column">
+        <div class="day-header">Wednesday</div>
+        <div class="class-block">Math 101<br />9:00–10:30</div>
+        <div class="class-block">CS 101<br />15:00–16:00</div>
+      </div>
+      <div class="day-column">
+        <div class="day-header">Thursday</div>
+        <div class="class-block">History 202<br />10:00–11:30</div>
+      </div>
+      <div class="day-column">
+        <div class="day-header">Friday</div>
+        <div class="class-block">CS 101<br />13:00–14:30</div>
+      </div>
+      <div class="day-column">
+        <div class="day-header">Saturday</div>
+      </div>
+      <div class="day-column">
+        <div class="day-header">Sunday</div>
+      </div>
+    </div>
+  </body>
+</html>

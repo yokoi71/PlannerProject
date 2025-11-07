@@ -1,0 +1,370 @@
+<app-header></app-header>
+
+<div class="flex flex-col gap-8 p-6 sm:p-8 md:p-10">
+  <!-- Welcome Section -->
+  <section
+    class="bg-red-900 bg-opacity-90 rounded-xl shadow-lg p-8 sm:p-10 md:p-12 text-white"
+  >
+    <h1 class="text-3xl font-bold mb-4">Course Assignments & Exams Setup</h1>
+    <p class="text-lg text-red-100">
+      Manage homework and exams for each course by semester
+    </p>
+  </section>
+
+  <!-- Semester Section -->
+  <section
+    class="bg-red-200 bg-opacity-80 rounded-xl shadow-lg p-8 sm:p-10 md:p-12 text-red-900"
+  >
+    <h2 class="text-lg font-semibold mb-6">Semester Selection</h2>
+    <div class="bg-white bg-opacity-90 rounded-lg p-6 shadow-sm mb-6">
+      <div class="flex flex-wrap gap-4 items-center">
+        <label class="text-red-800 font-semibold">Select Semester:</label>
+        <select
+          [(ngModel)]="selectedSemester"
+          class="px-4 py-2 border border-red-300 rounded-lg focus:ring-2 focus:ring-red-500 focus:border-transparent transition-colors duration-200"
+        >
+          <option value="">Choose a semester...</option>
+          <ng-container *ngFor="let year of [currentYear, nextYear]">
+            <option [ngValue]="null" disabled>-- {{ year }} --</option>
+            <option *ngFor="let sem of semesters" [ngValue]="year + '-' + sem">
+              {{ year }} {{ sem | titlecase }}
+            </option>
+          </ng-container>
+        </select>
+      </div>
+    </div>
+  </section>
+
+  <!-- Course Sections -->
+  <div *ngIf="selectedSemester && courses.length > 0" class="space-y-8">
+    <section
+      *ngFor="let course of courses"
+      class="bg-red-200 bg-opacity-80 rounded-xl shadow-lg p-8 sm:p-10 md:p-12 text-red-900"
+    >
+      <h2 class="text-xl font-semibold mb-6">{{ course.courseName }}</h2>
+      <div class="bg-white bg-opacity-90 rounded-lg p-6 shadow-sm">
+        <div class="mb-4">
+          <p class="text-sm text-red-700 mb-1">
+            <i class="fa fa-user mr-1"></i><strong>Professor:</strong>
+            {{ course.professorName }}
+          </p>
+          <p class="text-sm text-red-700">
+            <i class="fa fa-map-marker mr-1"></i><strong>Room:</strong>
+            {{ course.room }}
+          </p>
+        </div>
+
+        <!-- Homework Section -->
+        <div class="mb-6">
+          <h3 class="text-lg font-semibold text-red-800 mb-4">
+            <i class="fa fa-book mr-2"></i>Homework Assignments
+          </h3>
+          <div class="bg-blue-50 border border-blue-200 rounded-lg p-4">
+            <div class="flex flex-col gap-4">
+              <div
+                class="flex flex-wrap items-center gap-4 font-semibold text-blue-800 mb-2"
+                *ngIf="getHomeworkForCourse(course.id).length > 0"
+              >
+                <div class="w-1/4 relative group">
+                  Title
+                  <span
+                    class="absolute left-1/2 -translate-x-1/2 -top-8 z-10 hidden group-hover:block bg-gray-800 text-white text-xs rounded px-2 py-1 whitespace-nowrap"
+                    >Title</span
+                  >
+                </div>
+                <div class="w-1/4 relative group">
+                  Description
+                  <span
+                    class="absolute left-1/2 -translate-x-1/2 -top-8 z-10 hidden group-hover:block bg-gray-800 text-white text-xs rounded px-2 py-1 whitespace-nowrap"
+                    >Description</span
+                  >
+                </div>
+                <div class="w-1/6 relative group">
+                  Due Date
+                  <span
+                    class="absolute left-1/2 -translate-x-1/2 -top-8 z-10 hidden group-hover:block bg-gray-800 text-white text-xs rounded px-2 py-1 whitespace-nowrap"
+                    >Due Date</span
+                  >
+                </div>
+                <div class="w-1/6 relative group">
+                  Status
+                  <span
+                    class="absolute left-1/2 -translate-x-1/2 -top-8 z-10 hidden group-hover:block bg-gray-800 text-white text-xs rounded px-2 py-1 whitespace-nowrap"
+                    >Status</span
+                  >
+                </div>
+                <div class="w-1/12 relative group">
+                  Reminder Days
+                  <span
+                    class="absolute left-1/2 -translate-x-1/2 -top-8 z-10 hidden group-hover:block bg-gray-800 text-white text-xs rounded px-2 py-1 whitespace-nowrap"
+                    >Reminder Days</span
+                  >
+                </div>
+                <div class="w-1/12"></div>
+              </div>
+              <div
+                *ngIf="getHomeworkForCourse(course.id).length === 0"
+                class="text-blue-700 text-sm mb-3"
+              >
+                No homework assignments added yet.
+              </div>
+              <div
+                *ngFor="
+                  let homework of getHomeworkForCourse(course.id);
+                  let i = index
+                "
+                class="flex flex-wrap items-center gap-4"
+              >
+                <input
+                  type="text"
+                  [(ngModel)]="homework.title"
+                  placeholder="Homework Title"
+                  class="w-1/4 px-4 py-2 border border-blue-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-colors duration-200"
+                  [ngClass]="{
+                    'text-gray-400':
+                      !homework.title || homework.title.trim() === '',
+                    'text-gray-900':
+                      homework.title && homework.title.trim() !== ''
+                  }"
+                />
+                <input
+                  type="text"
+                  [(ngModel)]="homework.description"
+                  placeholder="Description"
+                  class="w-1/4 px-4 py-2 border border-blue-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-colors duration-200"
+                  [ngClass]="{
+                    'text-gray-400':
+                      !homework.description ||
+                      homework.description.trim() === '',
+                    'text-gray-900':
+                      homework.description && homework.description.trim() !== ''
+                  }"
+                />
+                <input
+                  type="date"
+                  [(ngModel)]="homework.dueDate"
+                  placeholder="Due Date"
+                  class="w-1/6 px-4 py-2 border border-blue-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-colors duration-200"
+                  [ngClass]="{
+                    'text-gray-400': !homework.dueDate,
+                    'text-gray-900': homework.dueDate
+                  }"
+                />
+                <select
+                  [(ngModel)]="homework.status"
+                  class="w-1/6 px-4 py-2 border border-blue-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-colors duration-200"
+                >
+                  <option value="Pending">Pending</option>
+                  <option value="Completed">Completed</option>
+                </select>
+                <input
+                  type="number"
+                  [(ngModel)]="homework.reminderDaysBefore"
+                  placeholder="0"
+                  class="w-1/12 px-4 py-2 border border-blue-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-colors duration-200"
+                />
+                <button
+                  (click)="saveHomework(course.id, i)"
+                  class="px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 focus:ring-4 focus:ring-blue-300 transition-colors duration-200 mr-2"
+                >
+                  <i class="fa fa-save"></i> Save
+                </button>
+                <button
+                  (click)="deleteHomework(course.id, i)"
+                  class="px-4 py-2 bg-red-600 text-white rounded-lg hover:bg-red-700 focus:ring-4 focus:ring-red-300 transition-colors duration-200"
+                >
+                  <i class="fa fa-trash"></i> Delete
+                </button>
+              </div>
+            </div>
+            <div class="flex justify-end mt-6">
+              <button
+                (click)="addHomework(course.id)"
+                class="px-4 py-2 bg-blue-600 text-white text-sm rounded hover:bg-blue-700 transition-colors duration-200"
+              >
+                <i class="fa fa-plus mr-1"></i>Add Homework
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Exams Section -->
+        <div>
+          <h3 class="text-lg font-semibold text-red-800 mb-4">
+            <i class="fa fa-graduation-cap mr-2"></i>Exams
+          </h3>
+          <div class="bg-green-50 border border-green-200 rounded-lg p-4">
+            <div class="flex flex-col gap-4">
+              <div
+                class="flex flex-wrap items-center gap-4 font-semibold text-green-800 mb-2"
+                *ngIf="getExamsForCourse(course.id).length > 0"
+              >
+                <div class="w-1/6 relative group">
+                  Exam Type
+                  <span
+                    class="absolute left-1/2 -translate-x-1/2 -top-8 z-10 hidden group-hover:block bg-gray-800 text-white text-xs rounded px-2 py-1 whitespace-nowrap"
+                    >Exam Type</span
+                  >
+                </div>
+                <div class="w-1/6 relative group">
+                  Exam Date
+                  <span
+                    class="absolute left-1/2 -translate-x-1/2 -top-8 z-10 hidden group-hover:block bg-gray-800 text-white text-xs rounded px-2 py-1 whitespace-nowrap"
+                    >Exam Date</span
+                  >
+                </div>
+                <div class="w-1/12 relative group">
+                  Start Time
+                  <span
+                    class="absolute left-1/2 -translate-x-1/2 -top-8 z-10 hidden group-hover:block bg-gray-800 text-white text-xs rounded px-2 py-1 whitespace-nowrap"
+                    >Start Time</span
+                  >
+                </div>
+                <div class="w-1/12 relative group">
+                  End Time
+                  <span
+                    class="absolute left-1/2 -translate-x-1/2 -top-8 z-10 hidden group-hover:block bg-gray-800 text-white text-xs rounded px-2 py-1 whitespace-nowrap"
+                    >End Time</span
+                  >
+                </div>
+                <div class="w-1/6 relative group">
+                  Location
+                  <span
+                    class="absolute left-1/2 -translate-x-1/2 -top-8 z-10 hidden group-hover:block bg-gray-800 text-white text-xs rounded px-2 py-1 whitespace-nowrap"
+                    >Location</span
+                  >
+                </div>
+                <div class="w-1/12 relative group">
+                  Reminder Days
+                  <span
+                    class="absolute left-1/2 -translate-x-1/2 -top-8 z-10 hidden group-hover:block bg-gray-800 text-white text-xs rounded px-2 py-1 whitespace-nowrap"
+                    >Reminder Days</span
+                  >
+                </div>
+                <div class="w-1/12"></div>
+              </div>
+              <div
+                *ngIf="getExamsForCourse(course.id).length === 0"
+                class="text-green-700 text-sm mb-3"
+              >
+                No exams added yet.
+              </div>
+              <div
+                *ngFor="let exam of getExamsForCourse(course.id); let i = index"
+                class="flex flex-wrap items-center gap-4"
+              >
+                <select
+                  [(ngModel)]="exam.examType"
+                  class="w-1/6 px-4 py-2 border border-green-300 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-transparent transition-colors duration-200"
+                >
+                  <option value="">Select Exam Type</option>
+                  <option value="Midterm">Midterm</option>
+                  <option value="Final">Final</option>
+                  <option value="Quiz">Quiz</option>
+                  <option value="Other">Other</option>
+                </select>
+                <input
+                  type="date"
+                  [(ngModel)]="exam.examDate"
+                  placeholder="Exam Date"
+                  class="w-1/6 px-4 py-2 border border-green-300 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-transparent transition-colors duration-200"
+                  [ngClass]="{
+                    'text-gray-400': !exam.examDate,
+                    'text-gray-900': exam.examDate
+                  }"
+                />
+                <input
+                  type="time"
+                  [(ngModel)]="exam.startTime"
+                  placeholder="Start Time"
+                  class="w-1/12 px-4 py-2 border border-green-300 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-transparent transition-colors duration-200"
+                  [ngClass]="{
+                    'text-gray-400': !exam.startTime,
+                    'text-gray-900': exam.startTime
+                  }"
+                />
+                <input
+                  type="time"
+                  [(ngModel)]="exam.endTime"
+                  placeholder="End Time"
+                  class="w-1/12 px-4 py-2 border border-green-300 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-transparent transition-colors duration-200"
+                  [ngClass]="{
+                    'text-gray-400': !exam.endTime,
+                    'text-gray-900': exam.endTime
+                  }"
+                />
+                <input
+                  type="text"
+                  [(ngModel)]="exam.location"
+                  placeholder="Location"
+                  class="w-1/6 px-4 py-2 border border-green-300 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-transparent transition-colors duration-200"
+                  [ngClass]="{
+                    'text-gray-400':
+                      !exam.location || exam.location.trim() === '',
+                    'text-gray-900':
+                      exam.location && exam.location.trim() !== ''
+                  }"
+                />
+                <input
+                  type="number"
+                  [(ngModel)]="exam.reminderDaysBefore"
+                  placeholder="0"
+                  class="w-1/12 px-4 py-2 border border-green-300 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-transparent transition-colors duration-200"
+                />
+                <button
+                  (click)="saveExam(course.id, i)"
+                  class="px-4 py-2 bg-green-600 text-white rounded-lg hover:bg-green-700 focus:ring-4 focus:ring-green-300 transition-colors duration-200 mr-2"
+                >
+                  <i class="fa fa-save"></i> Save
+                </button>
+                <button
+                  (click)="deleteExam(course.id, i)"
+                  class="px-4 py-2 bg-red-600 text-white rounded-lg hover:bg-red-700 focus:ring-4 focus:ring-red-300 transition-colors duration-200"
+                >
+                  <i class="fa fa-trash"></i> Delete
+                </button>
+              </div>
+            </div>
+            <div class="flex justify-end mt-6">
+              <button
+                (click)="addExam(course.id)"
+                class="px-4 py-2 bg-green-600 text-white text-sm rounded hover:bg-green-700 transition-colors duration-200"
+              >
+                <i class="fa fa-plus mr-1"></i>Add Exam
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </div>
+
+  <!-- No Courses Message -->
+  <section
+    *ngIf="selectedSemester && courses.length === 0"
+    class="bg-red-200 bg-opacity-80 rounded-xl shadow-lg p-8 sm:p-10 md:p-12 text-red-900"
+  >
+    <div class="text-center">
+      <i class="fa fa-book text-6xl text-red-600 mb-4"></i>
+      <h2 class="text-xl font-semibold mb-2">No Courses Found</h2>
+      <p class="text-red-700">
+        No courses have been added for {{ selectedSemester }} yet.
+      </p>
+    </div>
+  </section>
+
+  <!-- No Semester Selected Message -->
+  <section
+    *ngIf="!selectedSemester"
+    class="bg-red-200 bg-opacity-80 rounded-xl shadow-lg p-8 sm:p-10 md:p-12 text-red-900"
+  >
+    <div class="text-center">
+      <i class="fa fa-calendar text-6xl text-red-600 mb-4"></i>
+      <h2 class="text-xl font-semibold mb-2">Select a Semester</h2>
+      <p class="text-red-700">
+        Please select a semester above to view and manage course assignments and
+        exams.
+      </p>
+    </div>
+  </section>
+</div>

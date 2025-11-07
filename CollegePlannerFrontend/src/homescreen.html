@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My College Planner</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Google Fonts - Inter -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #f0f4f8; /* Soft light blue-gray background */
+        }
+        /* Custom scrollbar for better aesthetics */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #e2e8f0; /* Soft gray for track */
+            border-radius: 10px;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #94a3b8; /* Muted blue-gray for thumb */
+            border-radius: 10px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #64748b; /* Darker blue-gray on hover */
+        }
+    </style>
+</head>
+<body class="flex flex-col min-h-screen p-4 sm:p-6 md:p-8">
+    <div class="container mx-auto max-w-7xl bg-white rounded-xl shadow-lg p-6 sm:p-8 md:p-10 flex-grow">
+        <!-- Header Section -->
+        <header class="mb-8 text-center">
+            <h1 class="text-4xl sm:text-5xl font-extrabold text-gray-800 mb-2">My College Planner</h1>
+            <p class="text-lg text-gray-600">Stay organized, stay ahead.</p>
+        </header>
+
+        <!-- Main Content Area -->
+        <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+            <!-- Weekly Schedule Section -->
+            <section class="lg:col-span-2 bg-blue-50 p-6 rounded-lg shadow-md">
+                <h2 class="text-2xl font-semibold text-blue-800 mb-5">Weekly Schedule</h2>
+                <div id="weekly-schedule" class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-4 gap-4">
+                    <!-- Schedule items will be populated here by JavaScript -->
+                </div>
+            </section>
+
+            <!-- Reminders Section -->
+            <section class="lg:col-span-1 bg-green-50 p-6 rounded-lg shadow-md">
+                <h2 class="text-2xl font-semibold text-green-800 mb-5">Important Reminders</h2>
+                <div id="reminders-list" class="space-y-4">
+                    <!-- Reminders will be populated here by JavaScript -->
+                </div>
+            </section>
+        </div>
+    </div>
+
+    <script>
+        // Dummy Data for the Planner
+        const weeklyScheduleData = [
+            { day: 'Monday', date: 'Jul 22', events: [
+                { type: 'Class', name: 'Intro to Psychology', time: '10:00 AM - 11:15 AM', color: 'bg-indigo-100 text-indigo-800' },
+                { type: 'Homework', name: 'Psychology Reading (Ch. 3)', time: 'Due Jul 24', color: 'bg-purple-100 text-purple-800' },
+                { type: 'Event', name: 'Study Group - Library', time: '3:00 PM - 4:00 PM', color: 'bg-yellow-100 text-yellow-800' }
+            ]},
+            { day: 'Tuesday', date: 'Jul 23', events: [
+                { type: 'Class', name: 'College Algebra', time: '9:00 AM - 9:50 AM', color: 'bg-indigo-100 text-indigo-800' },
+                { type: 'Class', name: 'English Composition', time: '1:00 PM - 2:15 PM', color: 'bg-indigo-100 text-indigo-800' },
+                { type: 'Homework', name: 'Algebra Problem Set', time: 'Due Jul 26', color: 'bg-purple-100 text-purple-800' }
+            ]},
+            { day: 'Wednesday', date: 'Jul 24', events: [
+                { type: 'Class', name: 'Intro to Psychology', time: '10:00 AM - 11:15 AM', color: 'bg-indigo-100 text-indigo-800' },
+                { type: 'Exam', name: 'Psychology Quiz 1', time: '10:00 AM', color: 'bg-red-100 text-red-800' },
+                { type: 'Event', name: 'Counseling Session', time: '2:00 PM - 3:00 PM', color: 'bg-yellow-100 text-yellow-800' }
+            ]},
+            { day: 'Thursday', date: 'Jul 25', events: [
+                { type: 'Class', name: 'College Algebra', time: '9:00 AM - 9:50 AM', color: 'bg-indigo-100 text-indigo-800' },
+                { type: 'Class', name: 'English Composition', time: '1:00 PM - 2:15 PM', color: 'bg-indigo-100 text-indigo-800' },
+                { type: 'Homework', name: 'English Essay Draft', time: 'Due Jul 29', color: 'bg-purple-100 text-purple-800' }
+            ]},
+            { day: 'Friday', date: 'Jul 26', events: [
+                { type: 'Event', name: 'Campus Tour Guide Duty', time: '11:00 AM - 1:00 PM', color: 'bg-yellow-100 text-yellow-800' },
+                { type: 'Homework', name: 'Review Algebra for next week', time: 'Self-paced', color: 'bg-purple-100 text-purple-800' }
+            ]},
+            { day: 'Saturday', date: 'Jul 27', events: [
+                { type: 'Event', name: 'Relaxation Time', time: 'All Day', color: 'bg-gray-100 text-gray-700' }
+            ]},
+            { day: 'Sunday', date: 'Jul 28', events: [
+                { type: 'Event', name: 'Plan Next Week', time: 'Evening', color: 'bg-gray-100 text-gray-700' }
+            ]}
+        ];
+
+        const remindersData = [
+            { task: 'Start studying for Psychology Quiz 1', deadline: '3 days left (Quiz on Jul 24)', color: 'bg-red-50 text-red-700 border-red-200' },
+            { task: 'Work on Algebra Problem Set', deadline: '2 days left (Due Jul 26)', color: 'bg-purple-50 text-purple-700 border-purple-200' },
+            { task: 'Begin English Essay Draft', deadline: '4 days left (Due Jul 29)', color: 'bg-orange-50 text-orange-700 border-orange-200' },
+            { task: 'Review notes for next week\'s classes', deadline: 'Weekend task', color: 'bg-blue-50 text-blue-700 border-blue-200' }
+        ];
+
+        // Function to render the weekly schedule
+        function renderWeeklySchedule() {
+            const scheduleContainer = document.getElementById('weekly-schedule');
+            scheduleContainer.innerHTML = ''; // Clear previous content
+
+            weeklyScheduleData.forEach(dayData => {
+                const dayCard = document.createElement('div');
+                dayCard.className = 'bg-white p-4 rounded-lg shadow-sm border border-gray-200';
+                dayCard.innerHTML = `
+                    <h3 class="text-lg font-semibold text-gray-700 mb-2">${dayData.day} <span class="text-gray-500 text-sm font-normal">(${dayData.date})</span></h3>
+                    <div class="space-y-2">
+                        ${dayData.events.map(event => `
+                            <div class="${event.color} p-3 rounded-md flex items-center justify-between text-sm">
+                                <div>
+                                    <span class="font-medium">${event.name}</span>
+                                    <p class="text-xs opacity-90">${event.time}</p>
+                                </div>
+                                <span class="text-xs font-semibold px-2 py-1 rounded-full bg-opacity-70">${event.type}</span>
+                            </div>
+                        `).join('')}
+                    </div>
+                `;
+                scheduleContainer.appendChild(dayCard);
+            });
+        }
+
+        // Function to render reminders
+        function renderReminders() {
+            const remindersList = document.getElementById('reminders-list');
+            remindersList.innerHTML = ''; // Clear previous content
+
+            remindersData.forEach(reminder => {
+                const reminderItem = document.createElement('div');
+                reminderItem.className = `${reminder.color} p-4 rounded-lg border flex items-start space-x-3`;
+                reminderItem.innerHTML = `
+                    <svg class="w-6 h-6 flex-shrink-0 text-current" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                    </svg>
+                    <div>
+                        <p class="font-medium text-base">${reminder.task}</p>
+                        <p class="text-sm opacity-90">${reminder.deadline}</p>
+                    </div>
+                `;
+                remindersList.appendChild(reminderItem);
+            });
+        }
+
+        // Initial render on page load
+        window.onload = function() {
+            renderWeeklySchedule();
+            renderReminders();
+        };
+    </script>
+</body>
+</html>

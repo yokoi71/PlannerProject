@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Student Planner App</title>
+    <style>
+      body {
+        margin: 0;
+        font-family: Arial, sans-serif;
+        background-color: #f4f6f9;
+      }
+
+      header {
+        background-color: #2c3e50;
+        color: white;
+        padding: 10px 20px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+      }
+
+      header h1 {
+        margin: 0;
+        font-size: 20px;
+      }
+
+      .logout-link {
+        color: #ecf0f1;
+        text-decoration: none;
+        font-size: 14px;
+        background-color: #e74c3c;
+        padding: 6px 12px;
+        border-radius: 4px;
+      }
+
+      .container {
+        display: flex;
+        height: calc(100vh - 50px);
+      }
+
+      nav {
+        width: 200px;
+        background-color: #34495e;
+        color: white;
+        display: flex;
+        flex-direction: column;
+        padding-top: 10px;
+      }
+
+      nav a {
+        color: white;
+        padding: 12px 16px;
+        text-decoration: none;
+        border-bottom: 1px solid #2c3e50;
+        font-size: 14px;
+      }
+
+      nav a:hover {
+        background-color: #3d566e;
+      }
+
+      main {
+        flex-grow: 1;
+        padding: 20px;
+        background-color: white;
+      }
+
+      .placeholder {
+        color: #888;
+        font-size: 16px;
+      }
+    </style>
+  </head>
+  <body>
+    <header>
+      <h1>Student Planner</h1>
+      <a href="#" class="logout-link">Logout</a>
+    </header>
+
+    <div class="container">
+      <nav>
+        <a href="#">📅 Calendar</a>
+        <a href="#">📚 Class List</a>
+        <a href="#">🔔 Reminders</a>
+        <a href="#">🎉 Events</a>
+        <a href="#">⚙️ Settings</a>
+      </nav>
+
+      <main>
+        <p class="placeholder">
+          Main view area. Select a section from the left.
+        </p>
+      </main>
+    </div>
+  </body>
+</html>

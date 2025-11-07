@@ -1,0 +1,219 @@
+<app-header></app-header>
+
+<!-- Target Week Selection Section -->
+<section
+  class="bg-gray-100 bg-opacity-90 rounded-xl shadow-lg p-2 sm:p-3 md:p-4 mx-6 sm:mx-8 md:mx-10 mt-6"
+>
+  <div class="flex items-center justify-center gap-4">
+    <button
+      (click)="goToPreviousWeek()"
+      class="px-3 py-1 bg-blue-600 text-white rounded-lg hover:bg-blue-700 focus:ring-4 focus:ring-blue-300 transition-colors duration-200 text-lg font-bold"
+      title="Previous Week"
+    >
+      ←
+    </button>
+
+    <div class="text-center">
+      <p class="text-sm font-semibold text-gray-800">
+        {{ getCurrentWeekDisplay() }}
+      </p>
+    </div>
+
+    <button
+      (click)="goToNextWeek()"
+      class="px-3 py-1 bg-blue-600 text-white rounded-lg hover:bg-blue-700 focus:ring-4 focus:ring-blue-300 transition-colors duration-200 text-lg font-bold"
+      title="Next Week"
+    >
+      →
+    </button>
+  </div>
+</section>
+
+<div class="flex flex-col md:flex-row gap-8 p-6 sm:p-8 md:p-10">
+  <!-- Left: Weekly Schedule -->
+  <section
+    class="flex-1 bg-blue-900 bg-opacity-90 rounded-xl shadow-lg p-8 sm:p-10 md:p-12 text-white"
+  >
+    <h2 class="text-2xl font-semibold mb-8">Weekly Schedule</h2>
+    <!-- Weekly schedule content goes here -->
+    <div
+      class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-4 gap-4"
+    >
+      <div
+        *ngFor="let dayData of schedules"
+        class="bg-blue-100 bg-opacity-30 p-4 rounded-lg shadow-sm border border-blue-200"
+      >
+        <h3 class="text-lg font-semibold text-white mb-2">
+          {{ dayData.day }}
+          <span class="text-blue-200 text-sm font-normal"
+            >({{ dayData.date }})</span
+          >
+        </h3>
+        <div class="space-y-2">
+          <!-- Show holiday indicator if no classes due to holiday -->
+          <div
+            *ngIf="dayData.isHoliday && dayData.events.length === 0"
+            class="bg-red-100 text-red-800 p-3 rounded-md flex items-center justify-center text-sm font-medium"
+          >
+            🎉 {{ dayData.holidayTitle || "Holiday - No Classes" }}
+          </div>
+
+          <!-- Show regular events -->
+          <div
+            *ngFor="let event of dayData.events"
+            [ngClass]="
+              event.color +
+              ' p-3 rounded-md flex items-center justify-between text-sm'
+            "
+          >
+            <div>
+              <span class="font-medium">{{ event.name }}</span>
+              <p class="text-xs opacity-90">{{ event.time }}</p>
+              <!-- Show description for reminders, events, homework, and exams -->
+              <p
+                *ngIf="
+                  (event.type === 'Reminder' ||
+                    event.type === 'Event' ||
+                    event.type === 'Homework' ||
+                    event.type === 'Exam') &&
+                  event.description
+                "
+                class="text-xs opacity-75 mt-1"
+              >
+                {{ event.description }}
+              </p>
+              <!-- Show location for events and exams -->
+              <p
+                *ngIf="
+                  (event.type === 'Event' || event.type === 'Exam') &&
+                  event.location
+                "
+                class="text-xs opacity-75"
+              >
+                📍 {{ event.location }}
+              </p>
+              <!-- Show status for homework -->
+              <p
+                *ngIf="event.type === 'Homework' && event.status"
+                class="text-xs opacity-75"
+              >
+                Status: {{ event.status }}
+              </p>
+            </div>
+            <span
+              class="text-xs font-semibold px-2 py-1 rounded-full bg-opacity-70"
+              >{{ event.type }}</span
+            >
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Right: Important Reminders -->
+  <section
+    class="flex-1 bg-blue-200 bg-opacity-80 rounded-xl shadow-lg p-8 sm:p-10 md:p-12 text-blue-900"
+  >
+    <h2 class="text-2xl font-semibold mb-8">Important Reminders</h2>
+
+    <!-- Reminders List -->
+    <div class="space-y-4">
+      <div
+        *ngFor="let reminder of reminders"
+        class="bg-white rounded-lg shadow-md p-4 mb-4 border-l-4"
+        [ngClass]="
+          reminder.type === 'Homework'
+            ? 'border-orange-500'
+            : reminder.type === 'Exam'
+            ? 'border-red-500'
+            : reminder.type === 'Event'
+            ? 'border-green-500'
+            : 'border-blue-500'
+        "
+      >
+        <div class="flex justify-between items-start mb-2">
+          <h3 class="text-lg font-semibold text-gray-800">
+            {{ reminder.title }}
+          </h3>
+          <span
+            class="px-2 py-1 text-xs font-semibold rounded-full"
+            [ngClass]="
+              reminder.type === 'Homework'
+                ? 'bg-orange-200 text-orange-800'
+                : reminder.type === 'Exam'
+                ? 'bg-red-200 text-red-800'
+                : reminder.type === 'Event'
+                ? 'bg-green-200 text-green-800'
+                : 'bg-blue-200 text-blue-800'
+            "
+          >
+            {{ reminder.type }}
+          </span>
+        </div>
+
+        <p *ngIf="reminder.description" class="text-gray-600 mb-2">
+          {{ reminder.description }}
+        </p>
+
+        <div class="flex flex-wrap gap-2 text-sm text-gray-500">
+          <span class="font-medium">
+            Due: {{ reminder.day }}, {{ reminder.date }}
+            <span *ngIf="reminder.time"> • {{ reminder.time }}</span>
+          </span>
+
+          <span
+            class="px-2 py-1 rounded-full text-xs font-semibold"
+            [ngClass]="
+              reminder.daysLeft < 0
+                ? 'bg-red-200 text-red-800'
+                : reminder.daysLeft === 0
+                ? 'bg-orange-200 text-orange-800'
+                : reminder.daysLeft <= 2
+                ? 'bg-yellow-200 text-yellow-800'
+                : 'bg-blue-200 text-blue-800'
+            "
+          >
+            {{ getDaysLeftText(reminder.daysLeft) }}
+          </span>
+
+          <span
+            *ngIf="
+              reminder.location &&
+              (reminder.type === 'Event' || reminder.type === 'Exam')
+            "
+            class="text-xs px-2 py-1 rounded-full bg-gray-200 text-gray-700"
+          >
+            📍 {{ reminder.location }}
+          </span>
+
+          <span
+            *ngIf="reminder.status && reminder.type === 'Homework'"
+            class="px-2 py-1 rounded-full text-xs font-medium"
+            [ngClass]="
+              reminder.status === 'Completed'
+                ? 'bg-green-200 text-green-800'
+                : 'bg-yellow-200 text-yellow-800'
+            "
+          >
+            {{ reminder.status }}
+          </span>
+
+          <span
+            *ngIf="reminder.recurring && reminder.recurring !== 'None'"
+            class="text-xs px-2 py-1 rounded-full bg-gray-200 text-gray-700"
+          >
+            {{ reminder.recurring }}
+          </span>
+        </div>
+      </div>
+    </div>
+
+    <!-- No reminders message -->
+    <div
+      *ngIf="!reminders || reminders.length === 0"
+      class="text-center text-blue-800 opacity-80 mt-8"
+    >
+      No reminders to display.
+    </div>
+  </section>
+</div>

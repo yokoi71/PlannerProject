@@ -1,0 +1,18 @@
+<svg width="200" height="200" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+  <!-- Solid background -->
+  <rect width="200" height="200" fill="#667eea"/>
+  
+  <!-- Graduation cap icon (white) -->
+  <g>
+    <!-- Cap top -->
+    <rect x="60" y="70" width="80" height="20" rx="6" fill="#fff"/>
+    <!-- Cap base (shadow) -->
+    <ellipse cx="100" cy="100" rx="38" ry="10" fill="#fff" opacity="0.7"/>
+    <!-- Tassel -->
+    <line x1="100" y1="90" x2="100" y2="120" stroke="#ffd700" stroke-width="4"/>
+    <circle cx="100" cy="120" r="6" fill="#ffd700"/>
+  </g>
+
+  <!-- Initials CP (optional, modern font) -->
+  <text x="100" y="165" text-anchor="middle" font-family="'Segoe UI', Arial, sans-serif" font-size="44" font-weight="bold" fill="#fff" letter-spacing="-2">CP</text>
+</svg> 

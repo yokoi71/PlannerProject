@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Weekly Scheduler</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <h1>Weekly Scheduler</h1>
+    <table>
+      <tr>
+        <th class="time-slot">Time</th>
+        <th>Monday</th>
+        <th>Tuesday</th>
+        <th>Wednesday</th>
+        <th>Thursday</th>
+        <th>Friday</th>
+        <th>Saturday</th>
+        <th>Sunday</th>
+      </tr>
+      <!-- Time Slots -->
+      <script>
+        const startHour = 8;
+        const endHour = 18;
+        for (let hour = startHour; hour < endHour; hour++) {
+          document.write('<tr>');
+          document.write('<td class="time-slot">' + hour + ':00</td>');
+          for (let day = 0; day < 7; day++) {
+            document.write('<td contenteditable="true"></td>');
+          }
+          document.write('</tr>');
+        }
+      </script>
+    </table>
+  </body>
+</html>

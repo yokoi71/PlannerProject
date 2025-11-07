@@ -1,0 +1,283 @@
+.add-class-form {
+  /* Enhanced modal overlay background */
+  background: linear-gradient(
+    135deg,
+    rgba(0, 0, 0, 0.7) 0%,
+    rgba(0, 0, 0, 0.5) 100%
+  );
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+  backdrop-filter: blur(4px);
+}
+
+.add-class-form .card {
+  background: linear-gradient(135deg, #ffffff 0%, #f8fafc 100%);
+  border: none;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.15), 0 8px 24px rgba(0, 0, 0, 0.1);
+  border-radius: 16px;
+  overflow: hidden;
+  animation: slideIn 0.3s ease-out;
+}
+
+@keyframes slideIn {
+  from {
+    opacity: 0;
+    transform: translateY(-20px) scale(0.95);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+.add-class-form .card-body {
+  padding: 2rem;
+}
+
+.add-class-form .card-title {
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: #1a202c;
+  margin-bottom: 0.5rem;
+  letter-spacing: -0.025em;
+}
+
+.add-class-form .text-muted {
+  color: #64748b !important;
+  font-size: 0.95rem;
+  line-height: 1.5;
+}
+
+.add-class-form .form-label {
+  font-weight: 600;
+  color: #374151;
+  font-size: 0.9rem;
+  margin-bottom: 0.5rem;
+  letter-spacing: 0.025em;
+}
+
+.add-class-form .form-control {
+  border: 2px solid #e5e7eb;
+  border-radius: 8px;
+  padding: 0.75rem 1rem;
+  font-size: 1rem;
+  transition: all 0.2s ease;
+  background: #ffffff;
+}
+
+.add-class-form .form-control:focus {
+  border-color: #3b82f6;
+  box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
+  outline: none;
+}
+
+.add-class-form .form-control::placeholder {
+  color: #9ca3af;
+}
+
+.add-class-form .form-select {
+  border: 2px solid #e5e7eb;
+  border-radius: 8px;
+  padding: 0.5rem 0.75rem;
+  font-size: 0.9rem;
+  transition: all 0.2s ease;
+  background: #ffffff;
+}
+
+.add-class-form .form-select:focus {
+  border-color: #3b82f6;
+  box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
+  outline: none;
+}
+
+.add-class-form .form-check-input {
+  width: 1.2rem;
+  height: 1.2rem;
+  border: 2px solid #d1d5db;
+  border-radius: 4px;
+  transition: all 0.2s ease;
+}
+
+.add-class-form .form-check-input:checked {
+  background-color: #3b82f6;
+  border-color: #3b82f6;
+}
+
+.add-class-form .form-check-input:focus {
+  box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
+}
+
+.add-class-form .form-check-label {
+  font-weight: 500;
+  color: #374151;
+  font-size: 0.95rem;
+}
+
+.add-class-form .btn {
+  padding: 0.75rem 1.5rem;
+  border-radius: 8px;
+  font-weight: 600;
+  font-size: 0.95rem;
+  transition: all 0.2s ease;
+  border: 2px solid transparent;
+}
+
+.add-class-form .btn-primary {
+  background: linear-gradient(135deg, #3b82f6 0%, #2563eb 100%);
+  border-color: #3b82f6;
+  color: white;
+}
+
+.add-class-form .btn-primary:hover {
+  background: linear-gradient(135deg, #2563eb 0%, #1d4ed8 100%);
+  border-color: #2563eb;
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(59, 130, 246, 0.3);
+}
+
+.add-class-form .btn-primary:disabled {
+  background: #9ca3af;
+  border-color: #9ca3af;
+  cursor: not-allowed;
+  transform: none;
+  box-shadow: none;
+}
+
+.add-class-form .btn-outline-secondary {
+  color: #6b7280;
+  border-color: #d1d5db;
+  background: transparent;
+}
+
+.add-class-form .btn-outline-secondary:hover {
+  background: #f3f4f6;
+  border-color: #9ca3af;
+  color: #374151;
+  transform: translateY(-1px);
+}
+
+.add-class-form .alert-danger {
+  background: linear-gradient(135deg, #fef2f2 0%, #fee2e2 100%);
+  border: 2px solid #fecaca;
+  border-radius: 8px;
+  color: #dc2626;
+  font-weight: 500;
+  padding: 1rem;
+}
+
+.add-class-form .d-flex.gap-2 {
+  gap: 0.75rem !important;
+}
+
+.add-class-form .mb-3 {
+  margin-bottom: 1.5rem !important;
+}
+
+.add-class-form .mb-4 {
+  margin-bottom: 2rem !important;
+}
+
+/* New UI Elements */
+.add-class-form .card-header {
+  background: linear-gradient(135deg, #3b82f6 0%, #2563eb 100%) !important;
+  border-bottom: none;
+  padding: 1.5rem 2rem;
+}
+
+.add-class-form .card-header h4 {
+  font-weight: 700;
+  margin: 0;
+}
+
+.add-class-form .section-header {
+  position: relative;
+}
+
+.add-class-form .section-header h6 {
+  font-weight: 600;
+  font-size: 1rem;
+  margin-bottom: 0.5rem;
+}
+
+.add-class-form .section-divider {
+  height: 2px;
+  background: linear-gradient(90deg, #3b82f6 0%, #e5e7eb 100%);
+  border-radius: 1px;
+}
+
+.add-class-form .schedule-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 1rem;
+  margin-bottom: 1rem;
+}
+
+.add-class-form .schedule-item {
+  border: 2px solid #e5e7eb;
+  border-radius: 8px;
+  padding: 1rem;
+  transition: all 0.2s ease;
+}
+
+.add-class-form .schedule-item:hover {
+  border-color: #3b82f6;
+  box-shadow: 0 2px 8px rgba(59, 130, 246, 0.1);
+}
+
+.add-class-form .day-header {
+  margin-bottom: 0.75rem;
+}
+
+.add-class-form .day-header .form-check-label {
+  font-size: 0.95rem;
+  color: #374151;
+}
+
+.add-class-form .time-selectors {
+  padding-top: 0.5rem;
+  border-top: 1px solid #f3f4f6;
+}
+
+.add-class-form .time-selectors .form-label {
+  font-size: 0.8rem;
+  color: #6b7280;
+  margin-bottom: 0.25rem;
+}
+
+.add-class-form .border-top {
+  border-top: 2px solid #e5e7eb !important;
+}
+
+.add-class-form .btn i {
+  font-size: 0.9rem;
+}
+
+.add-class-form .alert i {
+  font-size: 1rem;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .add-class-form .schedule-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .add-class-form .card {
+    min-width: 95vw !important;
+    max-width: 95vw !important;
+    margin: 1rem;
+  }
+}
+
+.add-dialog h2 {
+  margin-top: 0;
+  color: #2563eb;
+  font-size: 1.5rem;
+}

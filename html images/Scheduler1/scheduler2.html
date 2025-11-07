@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Weekly Class Schedule</title>
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        margin: 20px;
+      }
+
+      h1 {
+        text-align: center;
+      }
+
+      .schedule-container {
+        display: grid;
+        grid-template-columns: 60px repeat(7, 1fr);
+        grid-auto-rows: 40px;
+        border: 1px solid #ccc;
+        max-width: 1000px;
+        margin: 0 auto;
+        position: relative;
+      }
+
+      .schedule-container .time-slot {
+        border: 1px solid #eee;
+        text-align: right;
+        padding-right: 5px;
+        font-size: 12px;
+        background: #f9f9f9;
+      }
+
+      .schedule-container .day-label {
+        background-color: #f0f0f0;
+        font-weight: bold;
+        text-align: center;
+        line-height: 40px;
+        border: 1px solid #ccc;
+      }
+
+      .class-block {
+        position: absolute;
+        width: calc((100% - 60px) / 7);
+        background-color: #90caf9;
+        border-left: 4px solid #1e88e5;
+        color: #000;
+        padding: 3px;
+        font-size: 12px;
+        box-sizing: border-box;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>Weekly Class Schedule</h1>
+
+    <div class="schedule-container">
+      <!-- Header Row -->
+      <div></div>
+      <div class="day-label">Mon</div>
+      <div class="day-label">Tue</div>
+      <div class="day-label">Wed</div>
+      <div class="day-label">Thu</div>
+      <div class="day-label">Fri</div>
+      <div class="day-label">Sat</div>
+      <div class="day-label">Sun</div>
+
+      <!-- Time Slots: 8 AM to 6 PM -->
+      <!-- 10 hours = 10 rows -->
+      <!-- Left column with time labels -->
+      <!-- Each row is 40px tall -->
+      <div class="time-slot">8:00</div>
+      <div></div>
+      <div></div>
+      <div></div>
+      <div></div>
+      <div></div>
+      <div></div>
+      <div></div>
+      <div class="time-slot">9:00</div>
+      <div></div>
+      <div></div>
+      <div></div>
+      <div></div>
+      <div></div>
+      <div></div>
+      <div></div>
+      <div class="time-slot">10:00</div>
+      <div></div>
+      <div></div>
+      <div></div>
+      <div></div>
+      <div></div>
+      <div></div>
+      <div></div>
+      <div class="time-slot">11:00</div>
+      <div></div>
+      <div></div>
+      <div></div>
+      <div></div>
+      <div></div>
+      <div></div>
+      <div></div>
+      <div class="time-slot">12:00</div>
+      <div></div>
+      <div></div>
+      <div></div>
+      <div></div>
+      <div></div>
+      <div></div>
+      <div></div>
+      <div class="time-slot">13:00</div>
+      <div></div>
+      <div></div>
+      <div></div>
+      <div></div>
+      <div></div>
+      <div></div>
+      <div></div>
+      <div class="time-slot">14:00</div>
+      <div></div>
+      <div></div>
+      <div></div>
+      <div></div>
+      <div></div>
+      <div></div>
+      <div></div>
+      <div class="time-slot">15:00</div>
+      <div></div>
+      <div></div>
+      <div></div>
+      <div></div>
+      <div></div>
+      <div></div>
+      <div></div>
+      <div class="time-slot">16:00</div>
+      <div></div>
+      <div></div>
+      <div></div>
+      <div></div>
+      <div></div>
+      <div></div>
+      <div></div>
+      <div class="time-slot">17:00</div>
+      <div></div>
+      <div></div>
+      <div></div>
+      <div></div>
+      <div></div>
+      <div></div>
+      <div></div>
+
+      <!-- Class blocks (positioned absolutely) -->
+      <!-- 40px per hour, top starts at 40px (after header row) -->
+      <!-- Example: Calculus on Monday and Wednesday 9:00–10:30 -->
+      <div
+        class="class-block"
+        style="
+          top: 80px;
+          height: 60px;
+          left: calc(60px + 0 * (100% - 60px) / 7);
+        "
+      >
+        Calculus<br />9:00–10:30
+      </div>
+      <div
+        class="class-block"
+        style="
+          top: 80px;
+          height: 60px;
+          left: calc(60px + 2 * (100% - 60px) / 7);
+        "
+      >
+        Calculus<br />9:00–10:30
+      </div>
+
+      <!-- Physics on Tue/Thu 13:00–14:30 -->
+      <div
+        class="class-block"
+        style="
+          top: 240px;
+          height: 60px;
+          left: calc(60px + 1 * (100% - 60px) / 7);
+        "
+      >
+        Physics<br />13:00–14:30
+      </div>
+      <div
+        class="class-block"
+        style="
+          top: 240px;
+          height: 60px;
+          left: calc(60px + 3 * (100% - 60px) / 7);
+        "
+      >
+        Physics<br />13:00–14:30
+      </div>
+
+      <!-- History on Friday 11:00–12:00 -->
+      <div
+        class="class-block"
+        style="
+          top: 160px;
+          height: 40px;
+          left: calc(60px + 4 * (100% - 60px) / 7);
+        "
+      >
+        History<br />11:00–12:00
+      </div>
+    </div>
+  </body>
+</html>

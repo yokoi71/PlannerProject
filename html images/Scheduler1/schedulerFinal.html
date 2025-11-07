@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Weekly Class Schedule</title>
+    <style>
+      body {
+        font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+        background-color: #f9f9fb;
+        margin: 0;
+        padding: 20px;
+        color: #333;
+        font-size: 12px;
+      }
+
+      h1 {
+        text-align: center;
+        margin-bottom: 20px;
+        font-size: 20px;
+        color: #2c3e50;
+      }
+
+      .schedule-wrapper {
+        max-width: 660px; /* 60% of 1100px */
+        margin: auto;
+        background: #fff;
+        border-radius: 8px;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+        overflow: hidden;
+      }
+
+      .day-labels {
+        display: grid;
+        grid-template-columns: 36px repeat(7, 1fr); /* reduced width */
+        background: #34495e;
+        color: #fff;
+        font-weight: 600;
+        text-align: center;
+        font-size: 11px;
+      }
+
+      .day-labels div {
+        padding: 6px 0;
+        border-right: 1px solid #4c5c6b;
+      }
+
+      .schedule-container {
+        position: relative;
+        display: grid;
+        grid-template-columns: 36px repeat(7, 1fr);
+        grid-auto-rows: 0.96px; /* 1 minute = 0.96px (60% of 1.6px) */
+        height: 576px; /* 60% of 960px */
+        background: #fff;
+      }
+
+      .time-label {
+        position: absolute;
+        left: 0;
+        width: 32px;
+        text-align: right;
+        font-size: 9px;
+        padding-right: 4px;
+        color: #555;
+      }
+
+      .hour-line {
+        position: absolute;
+        left: 36px;
+        width: calc(100% - 36px);
+        height: 1px;
+        background: #ececec;
+      }
+
+      .day-divider {
+        position: absolute;
+        top: 0;
+        bottom: 0;
+        width: 1px;
+        background: #e0e0e0;
+      }
+
+      .class-block {
+        position: absolute;
+        width: calc((100% - 36px) / 7);
+        background: linear-gradient(to bottom right, #81c784, #66bb6a);
+        border-left: 3px solid #388e3c;
+        color: #fff;
+        padding: 3px;
+        font-size: 10px;
+        box-sizing: border-box;
+        border-radius: 4px;
+        box-shadow: 0 1px 4px rgba(0, 0, 0, 0.08);
+      }
+    </style>
+  </head>
+  <body>
+    <h1>Weekly Class Schedule</h1>
+    <div class="schedule-wrapper">
+      <div class="day-labels">
+        <div></div>
+        <div>Mon</div>
+        <div>Tue</div>
+        <div>Wed</div>
+        <div>Thu</div>
+        <div>Fri</div>
+        <div>Sat</div>
+        <div>Sun</div>
+      </div>
+
+      <div class="schedule-container">
+        <!-- Time labels and hour lines -->
+        <script>
+          for (let h = 8; h <= 18; h++) {
+            const y = (h - 8) * 57.6; // 96 * 0.6 = 57.6px per hour
+            document.write(
+              `<div class="time-label" style="top: ${y}px;">${h}:00</div>`
+            );
+            document.write(
+              `<div class="hour-line" style="top: ${y}px;"></div>`
+            );
+          }
+        </script>
+
+        <!-- Vertical dividers -->
+        <div
+          class="day-divider"
+          style="left: calc(36px + 1 * (100% - 36px) / 7)"
+        ></div>
+        <div
+          class="day-divider"
+          style="left: calc(36px + 2 * (100% - 36px) / 7)"
+        ></div>
+        <div
+          class="day-divider"
+          style="left: calc(36px + 3 * (100% - 36px) / 7)"
+        ></div>
+        <div
+          class="day-divider"
+          style="left: calc(36px + 4 * (100% - 36px) / 7)"
+        ></div>
+        <div
+          class="day-divider"
+          style="left: calc(36px + 5 * (100% - 36px) / 7)"
+        ></div>
+        <div
+          class="day-divider"
+          style="left: calc(36px + 6 * (100% - 36px) / 7)"
+        ></div>
+
+        <!-- Soil Science class blocks -->
+        <div
+          class="class-block"
+          style="
+            top: 67.2px;
+            height: 48px;
+            left: calc(36px + 0 * (100% - 36px) / 7);
+          "
+        >
+          Soil Science<br />9:10–10:00
+        </div>
+
+        <div
+          class="class-block"
+          style="
+            top: 67.2px;
+            height: 48px;
+            left: calc(36px + 1 * (100% - 36px) / 7);
+          "
+        >
+          Soil Science<br />9:10–10:00
+        </div>
+
+        <div
+          class="class-block"
+          style="
+            top: 268.8px;
+            height: 76.8px;
+            left: calc(36px + 4 * (100% - 36px) / 7);
+          "
+        >
+          Soil Science<br />12:40–14:00
+        </div>
+      </div>
+    </div>
+  </body>
+</html>

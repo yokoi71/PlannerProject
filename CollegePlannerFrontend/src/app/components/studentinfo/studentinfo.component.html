@@ -1,0 +1,149 @@
+<app-header></app-header>
+
+<div class="flex flex-col gap-8 p-6 sm:p-8 md:p-10">
+  <!-- Header Section -->
+  <section
+    class="bg-blue-900 bg-opacity-90 rounded-xl shadow-lg p-8 sm:p-10 md:p-12 text-white"
+  >
+    <h1 class="text-3xl font-bold mb-4">Student Information</h1>
+    <p class="text-lg text-blue-100">
+      Here is the information we have on file for the student.
+    </p>
+  </section>
+
+  <!-- Form Section -->
+  <section
+    class="bg-blue-200 bg-opacity-80 rounded-xl shadow-lg p-8 sm:p-10 md:p-12 text-blue-900"
+  >
+    <form #studentForm="ngForm">
+      <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+        <!-- Personal Details -->
+        <div class="bg-white bg-opacity-90 rounded-lg p-6 shadow-sm">
+          <h2
+            class="text-2xl font-semibold mb-6 text-blue-900 border-b-2 border-blue-200 pb-3"
+          >
+            <i class="fa fa-user-circle-o text-blue-600 mr-3"></i>
+            Personal Details
+          </h2>
+
+          <div class="space-y-4">
+            <div>
+              <label class="block text-sm font-semibold text-blue-800 mb-2"
+                >Name</label
+              >
+              <input
+                type="text"
+                class="w-full px-4 py-3 border border-blue-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-colors duration-200"
+                [(ngModel)]="student.name"
+                name="name"
+                required
+                placeholder="Enter your full name"
+              />
+            </div>
+
+            <div>
+              <label class="block text-sm font-semibold text-blue-800 mb-2"
+                >Email</label
+              >
+              <input
+                type="email"
+                class="w-full px-4 py-3 border border-blue-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-colors duration-200"
+                [(ngModel)]="student.email"
+                name="email"
+                required
+                placeholder="Enter your email address"
+              />
+            </div>
+
+            <div>
+              <label class="block text-sm font-semibold text-blue-800 mb-2"
+                >Date of Birth</label
+              >
+              <input
+                type="text"
+                class="w-full px-4 py-3 border border-blue-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-colors duration-200"
+                [(ngModel)]="student.dateOfBirth"
+                name="dateOfBirth"
+                placeholder="MM/DD/YYYY"
+              />
+            </div>
+
+            <div>
+              <label class="block text-sm font-semibold text-blue-800 mb-2"
+                >Gender</label
+              >
+              <input
+                type="text"
+                class="w-full px-4 py-3 border border-blue-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-colors duration-200"
+                [(ngModel)]="student.gender"
+                name="gender"
+                placeholder="Enter your gender"
+              />
+            </div>
+          </div>
+        </div>
+
+        <!-- Academic Information -->
+        <div class="bg-white bg-opacity-90 rounded-lg p-6 shadow-sm">
+          <h2
+            class="text-2xl font-semibold mb-6 text-blue-900 border-b-2 border-blue-200 pb-3"
+          >
+            <i class="fa fa-graduation-cap text-blue-600 mr-3"></i>
+            Academic Information
+          </h2>
+
+          <div class="space-y-4">
+            <div>
+              <label class="block text-sm font-semibold text-blue-800 mb-2"
+                >School</label
+              >
+              <input
+                type="text"
+                class="w-full px-4 py-3 border border-blue-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-colors duration-200"
+                [(ngModel)]="student.schoolName"
+                name="schoolName"
+                placeholder="Enter your school name"
+              />
+            </div>
+
+            <div>
+              <label class="block text-sm font-semibold text-blue-800 mb-2"
+                >Grade</label
+              >
+              <input
+                type="text"
+                class="w-full px-4 py-3 border border-blue-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-colors duration-200"
+                [(ngModel)]="student.grade"
+                name="grade"
+                placeholder="Enter your current grade"
+              />
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Action Buttons -->
+      <div
+        class="flex flex-col sm:flex-row gap-4 justify-center mt-8 pt-6 border-t-2 border-blue-200"
+      >
+        <button
+          type="button"
+          class="px-8 py-3 bg-blue-600 text-white font-semibold rounded-lg hover:bg-blue-700 focus:ring-4 focus:ring-blue-300 transition-colors duration-200 transform hover:scale-105"
+          (click)="saveStudentInfo()"
+        >
+          <i class="fa fa-save mr-2"></i>
+          Save Information
+        </button>
+
+        <!-- <button
+          type="button"
+          class="px-8 py-3 bg-gray-600 text-white font-semibold rounded-lg hover:bg-gray-700 focus:ring-4 focus:ring-gray-300 transition-colors duration-200 transform hover:scale-105"
+          routerLink="/dashboard"
+        >
+          <i class="fa fa-arrow-left mr-2"></i>
+          Back to Dashboard
+        </button> -->
+      </div>
+    </form>
+  </section>
+</div>

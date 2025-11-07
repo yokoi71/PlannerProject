@@ -1,0 +1,126 @@
+<app-header></app-header>
+
+<div class="flex flex-col gap-8 p-6 sm:p-8 md:p-10">
+  <!-- Login Header Section -->
+  <section
+    class="bg-blue-900 bg-opacity-90 rounded-xl shadow-lg p-8 sm:p-10 md:p-12 text-white"
+  >
+    <h1 class="text-3xl font-bold mb-4 text-center">Sign In</h1>
+    <p class="text-lg text-blue-100 text-center">
+      Welcome back to College Planner
+    </p>
+  </section>
+
+  <!-- Login Form Section -->
+  <section
+    class="bg-blue-200 bg-opacity-80 rounded-xl shadow-lg p-8 sm:p-10 md:p-12 text-blue-900"
+  >
+    <div class="max-w-md mx-auto">
+      <div class="bg-white bg-opacity-90 rounded-lg p-8 shadow-sm">
+        <h2 class="text-2xl font-semibold mb-6 text-blue-900 text-center">
+          Login to Your Account
+        </h2>
+
+        <form
+          (ngSubmit)="loginForm.valid && validateUser(loginForm)"
+          #loginForm="ngForm"
+          class="space-y-6"
+        >
+          <!-- Email Field -->
+          <div>
+            <label
+              for="email"
+              class="block text-sm font-medium text-blue-900 mb-2"
+              >Email Address</label
+            >
+            <input
+              type="email"
+              class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all"
+              name="email"
+              id="email"
+              placeholder="Enter your email"
+              required
+              pattern="^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$"
+              [(ngModel)]="model.email"
+              #email="ngModel"
+            />
+            <div
+              *ngIf="(email.touched || loginForm.submitted) && email.errors?.['required']"
+              class="text-red-600 text-sm mt-1"
+            >
+              Email is required
+            </div>
+            <div
+              *ngIf="(email.touched || loginForm.submitted) && email.errors?.['pattern']"
+              class="text-red-600 text-sm mt-1"
+            >
+              Please provide a valid email address
+            </div>
+          </div>
+
+          <!-- Password Field -->
+          <div>
+            <label
+              for="password"
+              class="block text-sm font-medium text-blue-900 mb-2"
+              >Password</label
+            >
+            <input
+              type="password"
+              class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all"
+              name="password"
+              id="password"
+              placeholder="Enter your password"
+              required
+              minlength="5"
+              [(ngModel)]="model.password"
+              #password="ngModel"
+            />
+            <div
+              *ngIf="(password.touched || loginForm.submitted) && password.errors?.['required']"
+              class="text-red-600 text-sm mt-1"
+            >
+              Password is required
+            </div>
+            <div
+              *ngIf="(password.touched || loginForm.submitted) && password.errors?.['minlength']"
+              class="text-red-600 text-sm mt-1"
+            >
+              Password must be at least 5 characters long
+            </div>
+          </div>
+
+          <!-- Forgot Password Link -->
+          <div class="text-right">
+            <a
+              href="#"
+              class="text-blue-600 hover:text-blue-800 text-sm transition-colors"
+            >
+              Forgot Password?
+            </a>
+          </div>
+
+          <!-- Submit Button -->
+          <button
+            type="submit"
+            class="w-full bg-blue-600 hover:bg-blue-700 text-white font-semibold py-3 px-6 rounded-lg transition-colors duration-200 transform hover:scale-105"
+          >
+            <i class="fa fa-sign-in mr-2"></i>
+            Sign In
+          </button>
+
+          <!-- Sign Up Link -->
+          <div class="text-center pt-4">
+            <span class="text-blue-700 text-sm"> Don't have an account? </span>
+            <a
+              href="#"
+              class="text-blue-600 hover:text-blue-800 font-semibold text-sm ml-1 transition-colors"
+            >
+              Sign up now
+            </a>
+          </div>
+        </form>
+      </div>
+    </div>
+  </section>
+</div>

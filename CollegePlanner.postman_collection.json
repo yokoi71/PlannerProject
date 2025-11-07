@@ -1,0 +1,293 @@
+{
+	"info": {
+		"_postman_id": "dcf5f85c-254c-434f-855c-7a260ea77cc7",
+		"name": "CollegePlanner",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "34205592"
+	},
+	"item": [
+		{
+			"name": "CollegePlanner",
+			"item": [
+				{
+					"name": "myAccount",
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "eyJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJFYXp5IEJhbmsiLCJzdWIiOiJKV1QgVG9rZW4iLCJ1c2VybmFtZSI6ImhhcHB5QGV4YW1wbGUuY29tIiwiYXV0aG9yaXRpZXMiOiJST0xFX0FETUlOLFJPTEVfVVNFUiIsImlhdCI6MTcyMDE5MDgyMSwiZXhwIjoxNzIwMjIwODIxfQ.4VoI3vnT0O3PU4rjseZpwwmjrPEobzuHHOSoSpYv0WM"
+							}
+						],
+						"url": {
+							"raw": "/myAccount?id=1",
+							"path": [
+								"myAccount"
+							],
+							"query": [
+								{
+									"key": "id",
+									"value": "1"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "myBalance",
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "eyJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJFYXp5IEJhbmsiLCJzdWIiOiJKV1QgVG9rZW4iLCJ1c2VybmFtZSI6ImhhcHB5QGV4YW1wbGUuY29tIiwiYXV0aG9yaXRpZXMiOiJST0xFX0FETUlOLFJPTEVfVVNFUiIsImlhdCI6MTcyMDE5MDgyMSwiZXhwIjoxNzIwMjIwODIxfQ.4VoI3vnT0O3PU4rjseZpwwmjrPEobzuHHOSoSpYv0WM"
+							}
+						],
+						"url": {
+							"raw": "/myBalance?id=1",
+							"path": [
+								"myBalance"
+							],
+							"query": [
+								{
+									"key": "id",
+									"value": "1"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "myLoans",
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "eyJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJFYXp5IEJhbmsiLCJzdWIiOiJKV1QgVG9rZW4iLCJ1c2VybmFtZSI6ImhhcHB5QGV4YW1wbGUuY29tIiwiYXV0aG9yaXRpZXMiOiJST0xFX0FETUlOLFJPTEVfVVNFUiIsImlhdCI6MTcyMDE5MDgyMSwiZXhwIjoxNzIwMjIwODIxfQ.4VoI3vnT0O3PU4rjseZpwwmjrPEobzuHHOSoSpYv0WM"
+							}
+						],
+						"url": {
+							"raw": "/myLoans?id=1",
+							"path": [
+								"myLoans"
+							],
+							"query": [
+								{
+									"key": "id",
+									"value": "1"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "myCards",
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "eyJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJFYXp5IEJhbmsiLCJzdWIiOiJKV1QgVG9rZW4iLCJ1c2VybmFtZSI6ImhhcHB5QGV4YW1wbGUuY29tIiwiYXV0aG9yaXRpZXMiOiJST0xFX0FETUlOLFJPTEVfVVNFUiIsImlhdCI6MTcxODczMDUwNiwiZXhwIjoxNzE4NzYwNTA2fQ.cShQCfCjzVV4GBha4uZlChlRsE8tTjDgJ4Q8sGrhKyA"
+							}
+						],
+						"url": {
+							"raw": "/myCards?id=1",
+							"path": [
+								"myCards"
+							],
+							"query": [
+								{
+									"key": "id",
+									"value": "1"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "notices",
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "/notices",
+							"path": [
+								"notices"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "contact",
+					"request": {
+						"auth": {
+							"type": "basic",
+							"basic": [
+								{
+									"key": "password",
+									"value": "EazyBytes@54321",
+									"type": "string"
+								},
+								{
+									"key": "username",
+									"value": "happy@example.com",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "X-XSRF-TOKEN",
+								"value": "505f2ca2-58f9-472c-b3dc-33d4386dd6d9"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"contactName\": \"Madan Reddy\",\n    \"contactEmail\": \"tutor@eazybytes.com\",\n    \"subject\": \"Need a new saving account\",\n    \"message\": \"I want to open a new saving account in EazyBank\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "/contact",
+							"path": [
+								"contact"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "register",
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"name\": \"John Doe\",\n    \"email\": \"john@example.com\",\n    \"mobileNumber\": \"4564747484\",\n    \"pwd\": \"EazyBytes@12345\",\n    \"role\": \"user\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "/register",
+							"path": [
+								"register"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "user",
+					"request": {
+						"auth": {
+							"type": "basic",
+							"basic": [
+								{
+									"key": "username",
+									"value": "happy@example.com",
+									"type": "string"
+								},
+								{
+									"key": "password",
+									"value": "EazyBytes@54321",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "/user",
+							"path": [
+								"user"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "apiLogin",
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"username\": \"happy@example.com\",\n    \"password\": \"EazyBytes@54321\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "/apiLogin",
+							"path": [
+								"apiLogin"
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"auth": {
+				"type": "noauth"
+			},
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"type": "text/javascript",
+						"packages": {},
+						"exec": [
+							""
+						]
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"packages": {},
+						"exec": [
+							""
+						]
+					}
+				}
+			]
+		}
+	]
+}

@@ -1,0 +1,59 @@
+/* Course Assignment Exam Setup Component Styles */
+
+/* Custom scrollbar for better UX */
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: #f1f1f1;
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #dc2626;
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #b91c1c;
+}
+
+/* Smooth transitions for interactive elements */
+button,
+select,
+input {
+  transition: all 0.2s ease-in-out;
+}
+
+/* Focus states for accessibility */
+button:focus,
+select:focus,
+input:focus {
+  outline: 2px solid #dc2626;
+  outline-offset: 2px;
+}
+
+/* Hover effects for course cards */
+.course-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 25px rgba(220, 38, 38, 0.15);
+}
+
+/* Loading states */
+.loading {
+  opacity: 0.6;
+  pointer-events: none;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .flex-wrap {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .gap-4 {
+    gap: 1rem;
+  }
+}

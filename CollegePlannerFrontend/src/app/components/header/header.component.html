@@ -1,0 +1,96 @@
+<header class="header-container">
+  <div class="header-wrapper">
+    <!-- Logo Section -->
+    <div class="logo-section">
+      <a
+        class="logo-link"
+        [routerLink]="user.authStatus != 'AUTH' ? ['/home'] : ['/dashboard']"
+      >
+        <div class="logo-container">
+          <img
+            class="logo-image"
+            alt="College Planner Logo"
+            src="../assets/images/logo.png"
+          />
+          <span class="logo-text">College Planner</span>
+        </div>
+      </a>
+    </div>
+
+    <!-- Mobile Menu Toggle -->
+    <div class="mobile-menu-toggle" (click)="toggleMobileMenu()">
+      <div class="hamburger" [class.active]="isMobileMenuOpen">
+        <span class="line"></span>
+        <span class="line"></span>
+        <span class="line"></span>
+      </div>
+    </div>
+
+    <!-- Navigation Menu -->
+    <nav class="navigation-menu" [class.mobile-open]="isMobileMenuOpen">
+      <ul class="nav-list">
+        <li
+          class="nav-item"
+          *ngIf="user.authStatus != 'AUTH'"
+          routerLinkActive="active"
+        >
+          <a class="nav-link" routerLink="/home">
+            <i class="nav-icon">🏠</i>
+            <span>Home</span>
+          </a>
+        </li>
+        <li
+          class="nav-item"
+          *ngIf="user.authStatus != 'AUTH'"
+          routerLinkActive="active"
+        >
+          <a class="nav-link" routerLink="/login">
+            <i class="nav-icon">🔐</i>
+            <span>Login</span>
+          </a>
+        </li>
+        <li
+          class="nav-item"
+          *ngIf="user.authStatus != 'AUTH'"
+          routerLinkActive="active"
+        >
+          <a class="nav-link" routerLink="/contact">
+            <i class="nav-icon">📞</i>
+            <span>Contact</span>
+          </a>
+        </li>
+        <!-- <li
+          class="nav-item"
+          *ngIf="user.authStatus != 'AUTH'"
+          routerLinkActive="active"
+        >
+          <a class="nav-link" routerLink="/notices">
+            <i class="nav-icon">📢</i>
+            <span>Notices</span>
+          </a>
+        </li> -->
+        <li
+          class="nav-item"
+          *ngIf="user.authStatus == 'AUTH'"
+          routerLinkActive="active"
+        >
+          <a class="nav-link" routerLink="/dashboard">
+            <i class="nav-icon">📊</i>
+            <span>Dashboard</span>
+          </a>
+        </li>
+        <li
+          class="nav-item"
+          *ngIf="user.authStatus == 'AUTH'"
+          routerLinkActive="active"
+        >
+          <a class="nav-link" routerLink="/logout">
+            <i class="nav-icon">🚪</i>
+            <span>Logout</span>
+          </a>
+        </li>
+      </ul>
+    </nav>
+  </div>
+</header>
+<router-outlet></router-outlet>
