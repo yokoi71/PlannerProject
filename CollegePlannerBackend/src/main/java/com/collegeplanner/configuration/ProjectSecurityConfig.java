@@ -7,6 +7,7 @@ import java.util.Collections;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Profile;
+import org.springframework.core.env.Environment;
 import org.springframework.security.authentication.password.CompromisedPasswordChecker;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.http.SessionCreationPolicy;
@@ -38,7 +39,7 @@ import jakarta.servlet.http.HttpServletRequest;
 public class ProjectSecurityConfig {
 
 	@Bean
-	SecurityFilterChain defaultSecurityFilterChain(HttpSecurity http) throws Exception {
+	SecurityFilterChain defaultSecurityFilterChain(HttpSecurity http, Environment environment) throws Exception {
 
 		CsrfTokenRequestAttributeHandler csrfTokenRequestAttributeHandler = new CsrfTokenRequestAttributeHandler();
 		//String[] auth = { "Authorization" };
@@ -74,8 +75,8 @@ public class ProjectSecurityConfig {
 				.addFilterBefore(new RequestValidationBeforeFilter(), BasicAuthenticationFilter.class)
 				.addFilterAfter(new AuthoritiesLogginAfterFilter(), BasicAuthenticationFilter.class)
 				.addFilterAt(new AuthoritiesLoggingAtFilter(), BasicAuthenticationFilter.class)
-				.addFilterAfter(new JWTTokenGeneratorFilter(), BasicAuthenticationFilter.class)
-				.addFilterBefore(new JWTTokenValidatorFilter(), BasicAuthenticationFilter.class)
+				.addFilterAfter(new JWTTokenGeneratorFilter(environment), BasicAuthenticationFilter.class)
+				.addFilterBefore(new JWTTokenValidatorFilter(environment), BasicAuthenticationFilter.class)
 				.requiresChannel(rcc -> rcc.anyRequest().requiresInsecure())
 				.authorizeHttpRequests((requests) -> requests
 						//						.requestMatchers("/myAccount").hasAuthority("VIEWACCOUNT")

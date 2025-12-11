@@ -25,16 +25,23 @@ import jakarta.servlet.http.HttpServletResponse;
 
 public class JWTTokenValidatorFilter extends OncePerRequestFilter {
 
+	private final Environment environment;
+
+	public JWTTokenValidatorFilter(Environment environment) {
+		this.environment = environment;
+	}
+
 	@Override
 	protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain)
 			throws ServletException, IOException {
 		String jwt = request.getHeader(com.collegeplanner.constants.ApplicationConstants.JWT_HEADER);
 		if (null != jwt) {
 			try {
-				Environment env = getEnvironment();
-				if (null != env) {
-					String secret = env.getProperty(ApplicationConstants.JWT_SECRET_KEY,
-							ApplicationConstants.JWT_SECRET_DEFAULT_VALUE);
+				if (null != environment) {
+					String secret = environment.getProperty(ApplicationConstants.JWT_SECRET_KEY);
+					if (secret == null || secret.trim().isEmpty()) {
+						throw new IllegalStateException("JWT_SECRET environment variable is required but not set. Please configure JWT_SECRET in your environment or application properties.");
+					}
 					SecretKey secretKey = Keys.hmacShaKeyFor(secret.getBytes(StandardCharsets.UTF_8));
 					if (null != secretKey) {
 						Claims claims = Jwts.parser().verifyWith(secretKey)
